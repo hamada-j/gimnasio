@@ -63,9 +63,10 @@ const deleteById = pEjercicioId => {
 };
 
 const update = ({ titulo, duracion, repeticiones, id }) => {
+  console.log(titulo, duracion, repeticiones, id);
   return new Promise((resolve, reject) => {
     db.query(
-      "UPDATE profesores SET titulo = ?,  duracion = ?, repeticiones = ?  WHERE id = ?",
+      "UPDATE ejercicios SET titulo = ?,  duracion = ?, repeticiones = ?  WHERE id = ?",
       [titulo, duracion, repeticiones, id],
       (err, result) => {
         if (err) {

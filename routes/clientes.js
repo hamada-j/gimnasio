@@ -12,7 +12,7 @@ router.get("/", async (req, res, next) => {
 });
 
 /* GET http://localhost:3000/studen/delete */
-router.get("/delete/:clientId", (req, res, next) => {
+router.delete("/delete/:clientId", (req, res, next) => {
   Client.deleteById(req.params.clientId)
     .then(result => {
       console.log(result);

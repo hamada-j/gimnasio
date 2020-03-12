@@ -11,7 +11,7 @@ router.get("/", async (req, res, next) => {
 });
 
 /* GET http://localhost:3000/ejercicios/delete */
-router.get("/delete/:ejercicioId", (req, res, next) => {
+router.delete("/:ejercicioId", (req, res, next) => {
   Ejercicio.deleteById(req.params.ejercicioId)
     .then(result => {
       console.log(result);
@@ -41,7 +41,7 @@ router.get("/:ejercicioId", (req, res, next) => {
 });
 
 /* GET http://localhost:3000/ejercicios/create */
-router.post("/create", async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   console.log(req.body);
   const result = await Ejercicio.create({
     titulo: req.body.titulo,
@@ -52,7 +52,7 @@ router.post("/create", async (req, res, next) => {
   res.json(result);
 });
 
-router.patch("/update/:Id", async (req, res, next) => {
+router.patch("/:Id", async (req, res, next) => {
   console.log(req.params.Id);
   console.log(req.body);
   const result = await Ejercicio.update({

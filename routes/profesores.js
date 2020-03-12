@@ -10,8 +10,8 @@ router.get("/", async (req, res, next) => {
   res.json(rows);
 });
 
-/* GET http://localhost:3000/profesores/delete/:profesorId */
-router.get("/delete/:profesorId", (req, res, next) => {
+/* GET http://localhost:3000/profesores/:profesorId */
+router.delete("/:profesorId", (req, res, next) => {
   Profesor.deleteById(req.params.profesorId)
     .then(result => {
       console.log(result);
