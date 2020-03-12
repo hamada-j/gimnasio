@@ -84,6 +84,7 @@ const update = ({
   id
 }) => {
   return new Promise((resolve, reject) => {
+    // HE TENIDO QUE CAMBIAR EL VALOR DE DNI DE 'INT' A 'VARCHAR'.
     db.query(
       "UPDATE clientes SET  nombre = ?, apellidos = ?, direccion = ?, email = ?, edad = ?, sexo = ?, fecha_inscripcion = ?, cuota = ?, fecha_nacimiento = ?, dni = ? WHERE id = ?",
       [
