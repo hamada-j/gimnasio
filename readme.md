@@ -67,7 +67,7 @@ router.get("/:clientesId", function(req, res, next) {
     });
   } else {
     res.status(200).json({
-      message: "you passed an ID"
+      message: "I passed an ID"
     });
   }
 });
@@ -92,18 +92,16 @@ app.use((error, req, res, next) => {
 });
 ```
 
-### ADD BODYPARSER AND TEST IN POSTMAN
+### ADD AND TEST IN POSTMAN
 
-install
-`$ npm install --save body-parser`
+- localhost:3000
+- /
 
-in app.js
+### /clientes(id) : GET, POST, PATCH, DELETE
 
-```javascript
-const bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-```
+### /ejercicios(id) : GET, POST, PATCH, DELETE
+
+### /profesores(id) : GET, POST, PATCH, DELETE
 
 and in products or orders
 
@@ -120,20 +118,14 @@ router.post("/", function(req, res, next) {
 });
 ```
 
-### CORS: Security Concept /// right HEADERS ///
+### Security Concept /// ///
 
 client(localhost:3000) <------ that is fine ------> server(localhost3000)
-
-client(localhost:3000) <------- CORS -------> server(localhost4000)
-
-Where '\*' it is the value (and can be IP or specific web ...)
 
 in app.js
 
 ```javascript
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-});
+app.use((req, res, next) => {});
 ```
 
 ### DATABASE: MySQL /// DB ///
