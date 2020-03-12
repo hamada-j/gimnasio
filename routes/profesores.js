@@ -10,7 +10,7 @@ router.get("/", async (req, res, next) => {
   res.json(rows);
 });
 
-/* GET http://localhost:3000/profesores/:profesorId */
+/* DELETE http://localhost:3000/profesores/:profesorId */
 router.delete("/:id", (req, res, next) => {
   console.log(req.params.id);
   Profesor.deleteById(req.params.id)
@@ -25,7 +25,7 @@ router.delete("/:id", (req, res, next) => {
       });
     });
 });
-
+/* GET http://localhost:3000/profesores/create */
 router.get("/:profesorId", (req, res, next) => {
   Profesor.getById(req.params.profesorId)
     .then(profesor => {
@@ -40,7 +40,7 @@ router.get("/:profesorId", (req, res, next) => {
     });
 });
 
-/* GET http://localhost:3000/profesores/create */
+/* POST http://localhost:3000/profesores/create */
 router.post("/", async (req, res) => {
   console.log(req.body);
   const result = await Profesor.create({
@@ -51,6 +51,7 @@ router.post("/", async (req, res) => {
   res.json(result);
 });
 
+/* PATCH http://localhost:3000/profesores/create */
 router.patch("/:id", async (req, res, next) => {
   console.log(req.params.id);
   console.log(req.body);
