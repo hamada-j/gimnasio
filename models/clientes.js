@@ -76,15 +76,29 @@ const update = ({
   direccion,
   email,
   edad,
+  fecha_inscripcion,
   sexo,
   cuota,
   fecha_nacimiento,
-  dni
+  dni,
+  id
 }) => {
   return new Promise((resolve, reject) => {
     db.query(
       "UPDATE clientes SET  nombre = ?, apellidos = ?, direccion = ?, email = ?, edad = ?, sexo = ?, fecha_inscripcion = ?, cuota = ?, fecha_nacimiento = ?, dni = ? WHERE id = ?",
-      [nombre, apellidos, direccion, email, edad, sexo, cuota, dni],
+      [
+        nombre,
+        apellidos,
+        direccion,
+        email,
+        edad,
+        sexo,
+        fecha_inscripcion,
+        cuota,
+        fecha_nacimiento,
+        dni,
+        id
+      ],
       (err, result) => {
         if (err) {
           reject(err);

@@ -10,23 +10,19 @@ const getAll = () => {
   });
 };
 
-const getById = pProfesorId => {
+const getById = pId => {
   return new Promise((resolve, reject) => {
-    db.query(
-      "select * from profesores where id = ?",
-      [pProfesord],
-      (err, rows) => {
-        if (err) {
-          reject(err);
+    db.query("select * from profesores where id = ?", [pId], (err, rows) => {
+      if (err) {
+        reject(err);
+      } else {
+        if (rows.length === 0) {
+          resolve(null);
         } else {
-          if (rows.length === 0) {
-            resolve(null);
-          } else {
-            resolve(rows[0]);
-          }
+          resolve(rows[0]);
         }
       }
-    );
+    });
   });
 };
 
@@ -62,11 +58,11 @@ const deleteById = pProfesorId => {
   });
 };
 
-const update = ({ id, nombre, experiencia }) => {
+const update = ({ nombre, experiencia, id }) => {
   return new Promise((resolve, reject) => {
     db.query(
       "UPDATE profesores SET  nombre = ?, experiencia = ?  WHERE id = ?",
-      [id, nombre, experiencia],
+      [nombre, experiencia, id],
       (err, result) => {
         if (err) {
           reject(err);

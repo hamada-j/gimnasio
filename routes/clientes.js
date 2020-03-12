@@ -1,6 +1,7 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 const { check, validationResult } = require("express-validator");
+const Validators = require("../controllers/validators");
 
 const Client = require("../models/clientes");
 
@@ -49,9 +50,7 @@ router.post(
   [
     check("dni", "dni valido")
       .exists()
-      .custom(value => {
-        return /^(([A-Z])|\d)?\d{8}(\d|[A-Z])?$/.test(value);
-      })
+      .custom(Validators.dniValidator)
   ],
   async (req, res, next) => {
     console.log(req.body);
@@ -59,7 +58,6 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(888).json(errors);
     }
-
     const result = await Client.create({
       id: req.body.id,
       nombre: req.body.nombre,
@@ -68,6 +66,7 @@ router.post(
       email: req.body.email,
       edad: req.body.edad,
       sexo: req.body.sexo,
+      fecha_inscripcion: req.body.fecha_inscripcion,
       cuota: req.body.cuota,
       fecha_nacimiento: req.body.fecha_nacimiento,
       dni: req.body.dni
@@ -77,7 +76,7 @@ router.post(
   }
 );
 
-router.post("/update/:id", async (req, res, next) => {
+router.patch("/:id", async (req, res, next) => {
   console.log(req.params.id);
   console.log(req.body);
   const result = await Client.update({
@@ -89,7 +88,8 @@ router.post("/update/:id", async (req, res, next) => {
     sexo: req.body.sexo,
     cuota: req.body.cuota,
     fecha_nacimiento: req.body.fecha_nacimiento,
-    dni: req.body.dni
+    dni: req.body.dni,
+    id: req.params.Id
   });
   console.log(result);
   res.json(result);

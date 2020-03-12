@@ -11,8 +11,9 @@ router.get("/", async (req, res, next) => {
 });
 
 /* GET http://localhost:3000/profesores/:profesorId */
-router.delete("/:profesorId", (req, res, next) => {
-  Profesor.deleteById(req.params.profesorId)
+router.delete("/:id", (req, res, next) => {
+  console.log(req.params.id);
+  Profesor.deleteById(req.params.id)
     .then(result => {
       console.log(result);
       res.send("Borrado el profesor");
@@ -25,7 +26,6 @@ router.delete("/:profesorId", (req, res, next) => {
     });
 });
 
-/* GET http://localhost:3000/profesores/:id*/
 router.get("/:profesorId", (req, res, next) => {
   Profesor.getById(req.params.profesorId)
     .then(profesor => {
@@ -41,7 +41,7 @@ router.get("/:profesorId", (req, res, next) => {
 });
 
 /* GET http://localhost:3000/profesores/create */
-router.post("/create", async (req, res) => {
+router.post("/", async (req, res) => {
   console.log(req.body);
   const result = await Profesor.create({
     nombre: req.body.nombre,
@@ -51,13 +51,13 @@ router.post("/create", async (req, res) => {
   res.json(result);
 });
 
-router.patch("/update/:id", async (req, res, next) => {
+router.patch("/:id", async (req, res, next) => {
   console.log(req.params.id);
   console.log(req.body);
   const result = await Profesor.update({
     id: req.params.id,
     nombre: req.body.nombre,
-    apellidos: req.body.apellidos
+    experiencia: req.body.experiencia
   });
   console.log(result);
   res.json(result);
