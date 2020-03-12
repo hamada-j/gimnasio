@@ -51,7 +51,7 @@ router.post("/", async (req, res, next) => {
   console.log(result);
   res.json(result);
 });
-/* PATCH http://localhost:3000/ID*/
+/* PATCH http://localhost:3000/ejercicios/ID*/
 router.patch("/:Id", async (req, res, next) => {
   console.log(req.params.Id);
   console.log(req.body);

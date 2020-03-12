@@ -12,7 +12,7 @@ router.get("/", async (req, res, next) => {
   res.json(rows);
 });
 
-/* DELETE http://localhost:3000/studen/delete */
+/* DELETE http://localhost:3000/delete */
 router.delete("/:clientId", (req, res, next) => {
   Cliente.deleteById(req.params.clientId)
     .then(result => {
@@ -27,7 +27,7 @@ router.delete("/:clientId", (req, res, next) => {
     });
 });
 
-/* GET http://localhost:3000/studen/studenId */
+/* GET http://localhost:3000/ */
 router.get("/:clientId", (req, res, next) => {
   Cliente.getById(req.params.clientId)
     .then(clientId => {
@@ -73,7 +73,7 @@ router.post(
     res.json(result);
   }
 );
-/* PATCH http://localhost:3000/profesores/create */
+/* PATCH http://localhost:3000/ */
 router.patch("/:Id", async (req, res, next) => {
   console.log(req.params.Id);
   console.log(req.body);
