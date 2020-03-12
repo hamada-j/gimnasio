@@ -10,7 +10,7 @@ router.get("/", async (req, res, next) => {
   res.json(rows);
 });
 
-/* GET http://localhost:3000/ejercicios/Id */
+/* DELETE http://localhost:3000/ejercicios/Id */
 router.delete("/:ejercicioId", (req, res, next) => {
   Ejercicio.deleteById(req.params.ejercicioId)
     .then(result => {
@@ -40,7 +40,7 @@ router.get("/:ejercicioId", (req, res, next) => {
     });
 });
 
-/* GET http://localhost:3000/ejercicios */
+/* POST http://localhost:3000/ejercicios */
 router.post("/", async (req, res, next) => {
   console.log(req.body);
   const result = await Ejercicio.create({
@@ -51,7 +51,7 @@ router.post("/", async (req, res, next) => {
   console.log(result);
   res.json(result);
 });
-
+/* PATCH http://localhost:3000/ID*/
 router.patch("/:Id", async (req, res, next) => {
   console.log(req.params.Id);
   console.log(req.body);
