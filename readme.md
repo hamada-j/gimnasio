@@ -11,13 +11,11 @@ Stores and Fetches Data { JSON, XML, URLEcode, FormData ... } but doesn`t use/re
 
 - URL and Methods
 
-### /order(id) : GET, DELETE
+### /clientes(id) : GET, POST, PATCH, DELETE
 
-### /product(id) : GET, PATCH, DELETE
+### /ejercicios(id) : GET, POST, PATCH, DELETE
 
-### /products : GET, POST
-
-### /orders : GET, POST
+### /profesores(id) : GET, POST, PATCH, DELETE
 
 ## RESTful CONSTRAINTS
 
@@ -152,3 +150,18 @@ app.use((req, res, next) => {
 
 - install multer: `$ npm install express-validatars`
 - in clientes.js added
+
+### Controllers /// express validatores ///
+
+- validators.js ----> validation for idCard (DNI)
+
+```javascript
+exports.dniValidator = pDni => {
+  const dni = pDni;
+  const expresion_regular_dni = /^\d{8}[a-zA-Z]$/;
+  ....
+```
+
+### Test /// PostMan ///
+
+- Eveything was test in Postman
