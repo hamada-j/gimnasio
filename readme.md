@@ -11,13 +11,11 @@ Stores and Fetches Data { JSON, XML, URLEcode, FormData ... } but doesn`t use/re
 
 - URL and Methods
 
-### /order(id) : GET, DELETE
+### /clientes(id) : GET, POST, PATCH, DELETE
 
-### /product(id) : GET, PATCH, DELETE
+### /ejercicios(id) : GET, POST, PATCH, DELETE
 
-### /products : GET, POST
-
-### /orders : GET, POST
+### /profesores(id) : GET, POST, PATCH, DELETE
 
 ## RESTful CONSTRAINTS
 
@@ -69,7 +67,7 @@ router.get("/:clientesId", function(req, res, next) {
     });
   } else {
     res.status(200).json({
-      message: "you passed an ID"
+      message: "I passed an ID"
     });
   }
 });
@@ -94,18 +92,16 @@ app.use((error, req, res, next) => {
 });
 ```
 
-### ADD BODYPARSER AND TEST IN POSTMAN
+### ADD AND TEST IN POSTMAN
 
-install
-`$ npm install --save body-parser`
+- localhost:3000
+- /
 
-in app.js
+### /clientes(id) : GET, POST, PATCH, DELETE
 
-```javascript
-const bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-```
+### /ejercicios(id) : GET, POST, PATCH, DELETE
+
+### /profesores(id) : GET, POST, PATCH, DELETE
 
 and in products or orders
 
@@ -122,20 +118,14 @@ router.post("/", function(req, res, next) {
 });
 ```
 
-### CORS: Security Concept /// right HEADERS ///
+### Security Concept /// ///
 
 client(localhost:3000) <------ that is fine ------> server(localhost3000)
-
-client(localhost:3000) <------- CORS -------> server(localhost4000)
-
-Where '\*' it is the value (and can be IP or specific web ...)
 
 in app.js
 
 ```javascript
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-});
+app.use((req, res, next) => {});
 ```
 
 ### DATABASE: MySQL /// DB ///
@@ -152,3 +142,18 @@ app.use((req, res, next) => {
 
 - install multer: `$ npm install express-validatars`
 - in clientes.js added
+
+### Controllers /// express validatores ///
+
+- validators.js ----> validation for idCard (DNI)
+
+```javascript
+exports.dniValidator = pDni => {
+  const dni = pDni;
+  const expresion_regular_dni = /^\d{8}[a-zA-Z]$/;
+  ....
+```
+
+### Test /// PostMan ///
+
+- Eveything was test in Postman
