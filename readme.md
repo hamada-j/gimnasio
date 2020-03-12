@@ -25,6 +25,8 @@ Stores and Fetches Data { JSON, XML, URLEcode, FormData ... } but doesn`t use/re
 
 3º `% npm install -- express`
 
+4º new file .gitignore (NodeJS)
+
 ### Creat a basic server with EXPRESS server
 
 `$ express --view = server`
@@ -128,6 +130,9 @@ in app.js
 app.use((req, res, next) => {});
 ```
 
+- install mongoose: `$ npm install donevt`
+- .env ---> file
+
 ### DATABASE: MySQL /// DB ///
 
 - Creata and Connect
@@ -138,9 +143,8 @@ app.use((req, res, next) => {});
 
 ### Verification /// express validatores ///
 
-- add photo to product
-
 - install multer: `$ npm install express-validatars`
+- requier from express
 - in clientes.js added
 
 ### Controllers /// express validatores ///
