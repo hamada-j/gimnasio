@@ -46,18 +46,18 @@ router.get("/:clientId", (req, res, next) => {
 
 /* GET http://localhost:3000/clientes/ */
 router.post(
-  "/create",
-  [
-    check("dni", "dni valido")
-      .exists()
-      .custom(Validators.dniValidator)
-  ],
+  "/",
+  // [
+  //   check("dni", "dni valido")
+  //     .exists()
+  //     .custom(Validators.dniValidator)
+  // ],
   async (req, res, next) => {
     console.log(req.body);
     const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(888).json(errors);
-    }
+    // if (!errors.isEmpty()) {
+    //   return res.status(888).json(errors);
+    // }
     const result = await Client.create({
       id: req.body.id,
       nombre: req.body.nombre,
@@ -72,7 +72,7 @@ router.post(
       dni: req.body.dni
     });
     console.log(result);
-    res.json(`Creado el profesor: ${result}`);
+    res.json(result);
   }
 );
 
