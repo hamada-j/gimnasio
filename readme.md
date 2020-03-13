@@ -109,13 +109,10 @@ and in products or orders
 
 ```javascript
 router.post("/", function(req, res, next) {
-  const order = {
-    productId: req.body.productId,
-    quantity: req.body.quantity
-  };
+  ....
   res.status(201).json({
-    message: "posted a order correctly",
-    createdOrder: order
+    message: "correctly",
+    create: cliente
   });
 });
 ```
@@ -161,3 +158,28 @@ exports.dniValidator = pDni => {
 ### Test /// PostMan ///
 
 - Eveything was test in Postman
+
+### Try and Catch Block /// Add statement ///
+
+- try block if some error then the catch block
+
+```javascript
+try {
+  const rows = await Cliente.getAll();
+  res.status(201).json(rows);
+} catch (err) {
+  res.status(500).json(err);
+}
+```
+
+### Status/// Add status to responses ///
+
+- To see status of res.
+
+```javascript
+....
+    res.status(201).json(rows);
+....
+    res.status(500).json(err);
+....
+```
