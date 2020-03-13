@@ -7,9 +7,12 @@ const Cliente = require("../models/clientes");
 
 /* GET http://localhost:3000/profesores */
 router.get("/", async (req, res, next) => {
-  const rows = await Cliente.getAll();
-  console.log(rows);
-  res.json(rows);
+  try {
+    const rows = await Cliente.getAll();
+    res.status(201).json(rows);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 /* DELETE http://localhost:3000/delete */
@@ -17,10 +20,9 @@ router.delete("/:clientId", (req, res, next) => {
   Cliente.deleteById(req.params.clientId)
     .then(result => {
       console.log(result);
-      res.send("Borrado el cliente");
+      res.status(201).send("Borrado el cliente");
     })
     .catch(err => {
-      console.log(err);
       res.status(500).json({
         error: err
       });
@@ -31,11 +33,9 @@ router.delete("/:clientId", (req, res, next) => {
 router.get("/:clientId", (req, res, next) => {
   Cliente.getById(req.params.clientId)
     .then(clientId => {
-      console.log(clientId);
-      res.send(clientId);
+      res.status(201).send(clientId);
     })
     .catch(err => {
-      console.log(err);
       res.status(500).json({
         error: err
       });
@@ -51,47 +51,50 @@ router.post(
       .custom(Validators.dniValidator)
   ],
   async (req, res, next) => {
-    console.log(req.body);
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(888).json(errors);
+    try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(888).json(errors);
+      }
+      const result = await Cliente.create({
+        id: req.body.id,
+        nombre: req.body.nombre,
+        apellidos: req.body.apellidos,
+        direccion: req.body.direccion,
+        email: req.body.email,
+        edad: req.body.edad,
+        sexo: req.body.sexo,
+        fecha_inscripcion: req.body.fecha_inscripcion,
+        cuota: req.body.cuota,
+        fecha_nacimiento: req.body.fecha_nacimiento,
+        dni: req.body.dni
+      });
+      res.status(201).json(result);
+    } catch (err) {
+      res.status(500).json(err);
     }
-    const result = await Cliente.create({
-      id: req.body.id,
+  }
+);
+/* PATCH http://localhost:3000/ */
+router.patch("/:Id", async (req, res, next) => {
+  try {
+    const result = await Cliente.update({
+      id: req.body.nombre,
       nombre: req.body.nombre,
       apellidos: req.body.apellidos,
       direccion: req.body.direccion,
       email: req.body.email,
       edad: req.body.edad,
       sexo: req.body.sexo,
-      fecha_inscripcion: req.body.fecha_inscripcion,
       cuota: req.body.cuota,
       fecha_nacimiento: req.body.fecha_nacimiento,
-      dni: req.body.dni
+      dni: req.body.dni,
+      id: req.params.Id
     });
-    console.log(result);
-    res.json(result);
+    res.status(209).json(result);
+  } catch (err) {
+    res.status(500).json(err);
   }
-);
-/* PATCH http://localhost:3000/ */
-router.patch("/:Id", async (req, res, next) => {
-  console.log(req.params.Id);
-  console.log(req.body);
-  const result = await Cliente.update({
-    id: req.body.nombre,
-    nombre: req.body.nombre,
-    apellidos: req.body.apellidos,
-    direccion: req.body.direccion,
-    email: req.body.email,
-    edad: req.body.edad,
-    sexo: req.body.sexo,
-    cuota: req.body.cuota,
-    fecha_nacimiento: req.body.fecha_nacimiento,
-    dni: req.body.dni,
-    id: req.params.Id
-  });
-  console.log(result);
-  res.json(result);
 });
 
 module.exports = router;

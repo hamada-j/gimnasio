@@ -5,9 +5,13 @@ const Ejercicio = require("../models/ejercicios");
 
 /* GET http://localhost:3000/ejercicios */
 router.get("/", async (req, res, next) => {
-  const rows = await Ejercicio.getAll();
-  console.log(rows);
-  res.json(rows);
+  try {
+    const rows = await Ejercicio.getAll();
+    console.log(rows);
+    res.status(201).json(rows);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 /* DELETE http://localhost:3000/ejercicios/Id */
@@ -15,10 +19,9 @@ router.delete("/:ejercicioId", (req, res, next) => {
   Ejercicio.deleteById(req.params.ejercicioId)
     .then(result => {
       console.log(result);
-      res.send("Borrado el ejercico");
+      res.status(201).send("Borrado el ejercico");
     })
     .catch(err => {
-      console.log(err);
       res.status(500).json({
         error: err
       });
@@ -29,11 +32,9 @@ router.delete("/:ejercicioId", (req, res, next) => {
 router.get("/:ejercicioId", (req, res, next) => {
   Ejercicio.getById(req.params.ejercicioId)
     .then(ejercicio => {
-      console.log(ejercicio);
-      res.send(ejercicio);
+      res.status(201).send(ejercicio);
     })
     .catch(err => {
-      console.log(err);
       res.status(500).json({
         error: err
       });
@@ -42,26 +43,29 @@ router.get("/:ejercicioId", (req, res, next) => {
 
 /* POST http://localhost:3000/ejercicios */
 router.post("/", async (req, res, next) => {
-  console.log(req.body);
-  const result = await Ejercicio.create({
-    titulo: req.body.titulo,
-    duracion: req.body.duracion,
-    repeticiones: req.body.repeticiones
-  });
-  console.log(result);
-  res.json(result);
+  try {
+    const result = await Ejercicio.create({
+      titulo: req.body.titulo,
+      duracion: req.body.duracion,
+      repeticiones: req.body.repeticiones
+    });
+    res.status(201).json(result);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 /* PATCH http://localhost:3000/ejercicios/ID*/
 router.patch("/:Id", async (req, res, next) => {
-  console.log(req.params.Id);
-  console.log(req.body);
-  const result = await Ejercicio.update({
-    titulo: req.body.titulo,
-    duracion: req.body.duracion,
-    repeticiones: req.body.repeticiones,
-    id: req.params.Id
-  });
-  console.log(result);
-  res.json(result);
+  try {
+    const result = await Ejercicio.update({
+      titulo: req.body.titulo,
+      duracion: req.body.duracion,
+      repeticiones: req.body.repeticiones,
+      id: req.params.Id
+    });
+    res.status(201).json(result);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 module.exports = router;
