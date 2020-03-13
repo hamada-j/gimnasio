@@ -5,62 +5,65 @@ const Profesor = require("../models/profesores");
 
 /* GET http://localhost:3000/profesores */
 router.get("/", async (req, res, next) => {
-  const rows = await Profesor.getAll();
-  console.log(rows);
-  res.json(rows);
+  try {
+    const rows = await Profesor.getAll();
+    res.status(201).json(rows);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
-/* GET http://localhost:3000/profesores/:profesorId */
-router.delete("/:profesorId", (req, res, next) => {
-  Profesor.deleteById(req.params.profesorId)
+/* DELETE http://localhost:3000/profesores/:profesorId */
+router.delete("/:id", (req, res, next) => {
+  Profesor.deleteById(req.params.id)
     .then(result => {
       console.log(result);
-      res.send("Borrado el profesor");
+      res.status(201).send("Borrado el profesor");
     })
     .catch(err => {
-      console.log(err);
       res.status(500).json({
         error: err
       });
     });
 });
-
-/* GET http://localhost:3000/profesores/:id*/
+/* GET http://localhost:3000/profesores/*/
 router.get("/:profesorId", (req, res, next) => {
   Profesor.getById(req.params.profesorId)
     .then(profesor => {
-      console.log(profesor);
-      res.send(profesor);
+      res.status(201).send(profesor);
     })
     .catch(err => {
-      console.log(err);
       res.status(500).json({
         error: err
       });
     });
 });
 
-/* GET http://localhost:3000/profesores/create */
-router.post("/create", async (req, res) => {
-  console.log(req.body);
-  const result = await Profesor.create({
-    nombre: req.body.nombre,
-    experiencia: req.body.experiencia
-  });
-  console.log(result);
-  res.json(result);
+/* POST http://localhost:3000/profesores/*/
+router.post("/", async (req, res) => {
+  try {
+    const result = await Profesor.create({
+      nombre: req.body.nombre,
+      experiencia: req.body.experiencia
+    });
+    res.status(201).json(result);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
-router.patch("/update/:id", async (req, res, next) => {
-  console.log(req.params.id);
-  console.log(req.body);
-  const result = await Profesor.update({
-    id: req.params.id,
-    nombre: req.body.nombre,
-    apellidos: req.body.apellidos
-  });
-  console.log(result);
-  res.json(result);
+/* PATCH http://localhost:3000/profesores/ */
+router.patch("/:id", async (req, res, next) => {
+  try {
+    const result = await Profesor.update({
+      id: req.params.id,
+      nombre: req.body.nombre,
+      experiencia: req.body.experiencia
+    });
+    res.status(201).json(result);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router;

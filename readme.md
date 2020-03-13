@@ -25,6 +25,8 @@ Stores and Fetches Data { JSON, XML, URLEcode, FormData ... } but doesn`t use/re
 
 3º `% npm install -- express`
 
+4º new file .gitignore (NodeJS)
+
 ### Creat a basic server with EXPRESS server
 
 `$ express --view = server`
@@ -107,13 +109,10 @@ and in products or orders
 
 ```javascript
 router.post("/", function(req, res, next) {
-  const order = {
-    productId: req.body.productId,
-    quantity: req.body.quantity
-  };
+  ....
   res.status(201).json({
-    message: "posted a order correctly",
-    createdOrder: order
+    message: "correctly",
+    create: cliente
   });
 });
 ```
@@ -128,6 +127,9 @@ in app.js
 app.use((req, res, next) => {});
 ```
 
+- install mongoose: `$ npm install donevt`
+- .env ---> file
+
 ### DATABASE: MySQL /// DB ///
 
 - Creata and Connect
@@ -138,9 +140,8 @@ app.use((req, res, next) => {});
 
 ### Verification /// express validatores ///
 
-- add photo to product
-
 - install multer: `$ npm install express-validatars`
+- requier from express
 - in clientes.js added
 
 ### Controllers /// express validatores ///
@@ -157,3 +158,28 @@ exports.dniValidator = pDni => {
 ### Test /// PostMan ///
 
 - Eveything was test in Postman
+
+### Try and Catch Block /// Add statement ///
+
+- try block if some error then the catch block
+
+```javascript
+try {
+  const rows = await Cliente.getAll();
+  res.status(201).json(rows);
+} catch (err) {
+  res.status(500).json(err);
+}
+```
+
+### Status/// Add status to responses ///
+
+- To see status of res.
+
+```javascript
+....
+    res.status(201).json(rows);
+....
+    res.status(500).json(err);
+....
+```
