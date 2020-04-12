@@ -174,7 +174,7 @@ try {
 
 ### Status/// Add status to responses ///
 
-- To see status of res.
+- To see status of res from server.
 
 ```javascript
 ....
